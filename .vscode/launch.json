@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // F5: собрать и отладить файл из открытой вкладки.
+            // Ввод с клавиатуры — в отдельном окне Терминала
+            "name": "Отладка текущего файла",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/${fileBasenameNoExtension}",
+            "cwd": "${fileDirname}",
+            "MIMode": "lldb",
+            "externalConsole": true,
+            "preLaunchTask": "Собрать текущий файл"
+        }
+    ]
+}

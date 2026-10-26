@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Собрать текущий файл",
+            "type": "shell",
+            "command": "mkdir -p \"${workspaceFolder}/build\" && c++ -std=c++17 -Wall -g \"${file}\" -o \"${workspaceFolder}/build/${fileBasenameNoExtension}\"",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}

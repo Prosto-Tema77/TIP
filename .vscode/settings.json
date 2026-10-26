@@ -1,0 +1,27 @@
+{
+    // ▷ справа сверху (Code Runner) запускает файл из открытой вкладки.
+    // Программа собирается в папку build, рядом с .cpp ничего не появляется
+    "code-runner.executorMap": {
+        "cpp": "mkdir -p \"$workspaceRoot/build\" && c++ -std=c++17 -Wall $fullFileName -o \"$workspaceRoot/build/$fileNameWithoutExt\" && \"$workspaceRoot/build/$fileNameWithoutExt\""
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.ignoreSelection": true,
+
+    // прячем вторую кнопку ▷ от C/C++: она собирает программу рядом с исходником
+    "C_Cpp.debugShortcut": false,
+    "C_Cpp.default.cppStandard": "c++17",
+
+    // в проекте нет CMake, не предлагаем его настраивать
+    "cmake.configureOnOpen": false,
+    "cmake.showOptionsMovedNotification": false,
+
+    "files.exclude": {
+        "build": true,
+        "cmake-build-*": true,
+        "**/.idea": true,
+        "**/.DS_Store": true
+    },
+
+    "git.autofetch": true
+}
