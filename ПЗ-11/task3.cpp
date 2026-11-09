@@ -1,42 +1,43 @@
 #include <iostream>
+#include <vector>
 #include <algorithm>
-
 using namespace std;
 
 int main() {
     int n, k, l;
+
     cin >> n >> k >> l;
 
-    int a[100];
+    vector<int> a(n);
 
-    // Считываем стоимости
+    // Считываем стоимости растений
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
 
-    // Сортируем по убыванию
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n - 1; j++) {
-            if (a[j] < a[j + 1]) {
-                int temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
-        }
-    }
+    // Сортируем от дорогих к дешёвым
+    sort(a.begin(), a.end(), greater<int>());
 
     int sum = 0;
     int count = 0;
 
-    // Выбираем растения
+    // Перебираем все виды растений
     for (int i = 0; i < n; i++) {
+
+        // Берём не больше L растений одного вида
         for (int j = 0; j < l; j++) {
 
-            if (count < k) {
-                sum += a[i];
-                count++;
-            }
+            // Если уже набрали K растений
+            if (count == k)
+                break;
+
+            sum += a[i];
+            count++;
         }
+
+        // Если букет уже готов
+        if (count == k)
+            break;
     }
 
     cout << sum;

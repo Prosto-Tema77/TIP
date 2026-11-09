@@ -1,44 +1,57 @@
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
+
+// Проверяем, можно ли распределить пирожки
+bool check(vector<int>& a, int n, int d, int difference) {
+
+    int days = 1;
+
+    // Самый низкокалорийный пирожок текущего дня
+    int minimum = a[0];
+
+    for (int i = 1; i < n; i++) {
+
+        // Если разница слишком большая,
+        // начинаем новый день
+        if (a[i] - minimum > difference) {
+            days++;
+            minimum = a[i];
+        }
+    }
+
+    // Проверяем, хватает ли нам дней
+    return days <= d;
+}
 
 int main() {
     int n, d;
     cin >> n >> d;
 
-    vector<long long> a(n);
+    vector<int> a(n);
 
+    // Считываем калорийность пирожков
     for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
 
-    // Сортируем калорийность
+    // Сортируем пирожки по калорийности
     sort(a.begin(), a.end());
 
-    // Бинарный поиск минимальной разницы
-    long long left = 0;
-    long long right = a[n - 1] - a[0];
+    // Границы для бинарного поиска
+    int left = 0;
+    int right = a[n - 1] - a[0];
 
+    // Ищем минимальную разницу
     while (left < right) {
-        long long mid = left + (right - left) / 2;
 
-        int days = 1;
-        int start = 0;
+        int mid = (left + right) / 2;
 
-        // Проверяем, можно ли распределить пирожки
-        for (int i = 1; i < n; i++) {
-            if (a[i] - a[start] > mid) {
-                days++;
-                start = i;
-            }
-        }
-
-        if (days <= d) {
+        if (check(a, n, d, mid)) {
             right = mid;
-        } else {
+        }
+        else {
             left = mid + 1;
         }
     }
